@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script type="text/javascript" src="jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="vue.js"></script>
+    </head>
+    <style>
+        div {
+            width: 600px;
+            height: 600px;
+            margin: 100px auto;
+            z-index: 2;
+            position: relative;
+        }
+
+        video {
+            width: 90%;
+            height: 52%;
+            transform: scale(0.7, 0.995);
+            border-radius: 50px;
+            float: left;
+            top: -440px;
+            left: -2px;
+            z-index: -2;
+            position: relative;
+        }
+
+        img {
+            display: block;
+        }
+
+        .start, .next {
+            z-index: 5;
+            position: relative;
+        }
+
+        .start {
+            top: -700px;
+            left: 470px;
+        }
+
+        .next {
+            top: -625px;
+            left: 470px;
+        }
+    </style>
+    <body>
+        <div class="video-box">
+            <img src="TV.png">
+            <video id="video" src="1.mp4"></video>
+            <img class="start" src="button.png">
+            <img class="next" src="button.png">
+        </div>
+    </body>
+    <script>
+        $(".start").click(function () {
+            if ($(this).css("transform") == "none") {
+                $(this).css({transform: "rotate(45deg)"});
+                $("#video")[0].play();
+            } else {
+                $(this).css({transform: "none"});
+                $("#video")[0].pause();
+            }
+        });
+        var i = 0;
+        var j = 0;
+        var vnum = 4;
+        $(".next").click(function () {
+            i++;
+            j++;
+            $(".start").css({transform: "none"});
+            if (i % 4 == 0) {
+                $(this).css({transform: "none"});
+            } else {
+                $(this).css({transform: `rotate(${i * 45}deg)`});
+            }
+            if (j == vnum) {
+                j = 1;
+            }
+            $("#video").prop("src", `${j+1}.mp4`);
+        });
+    </script>
+</html>
